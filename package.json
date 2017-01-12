@@ -1,0 +1,17 @@
+{
+  "name": "stylesheet-toggle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "uglify": "node node_modules/uglify-js/bin/uglifyjs script.js -m -c -b beautify=false,quote_style=1 -o bookmark.js",
+    "bookmark": "npm run uglify && node -e 'require(\"./node_modules/prepend-file\")(\"bookmark.js\", \"javascript:\")' && cat bookmark.js && echo '\n'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prepend-file": "^1.3.0",
+    "uglify-js": "^2.7.4"
+  }
+}
