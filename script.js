@@ -43,15 +43,15 @@ window.onload = function () {
 
   function printCurrentStylesheets() {
     stylesheetUL = document.querySelector('.my-ui ul.stylesheet-list');
-    styleObjects.forEach(function (style) {
-      console.info(style);
+    styleObjects.forEach(function (style, index) {
       var li = document.createElement("li");
       li.innerHTML = style.fileName;
       li.attributes.fileName = style.fileName;
       li.attributes.file = style.file;
+      li.attributes.index = index;
       li.onclick = function (e) {
-        style.visible ? removeStyling(style) : addStyling(style)
         style.visible = !style.visible;
+        style.visible ? addStyling(style) : removeStyling(style)
       };
       stylesheetUL.appendChild(li)
     });
@@ -64,7 +64,11 @@ window.onload = function () {
   }
 
   function addStyling(style) {
-    document.head.appendChild(style.file);
+    styleObjects.forEach(function (s) {
+      if (s.visible) {
+        document.head.appendChild(s.file);
+      }
+    });
   }
 
   function resetMyUICss() {
